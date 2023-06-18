@@ -7,7 +7,9 @@ import _com2.F1.services.PistaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -30,6 +32,8 @@ public class PistaController {
     @PostMapping
     public ResponseEntity<PistaDto> inserirPista(@RequestBody PistaDto pistaDto){
         pistaDto = pistaService.inserirPista(pistaDto);
-        return ResponseEntity.ok().body(pistaDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+                .buildAndExpand(pistaDto.getId()).toUri();
+        return ResponseEntity.created(uri).body(pistaDto);
     }
 }

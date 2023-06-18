@@ -1,0 +1,1 @@
+INSERT INTO tb_pistas (nome, pais, voltas) VALUES ('Albert Park Circuit', 'Austrália', 58);
